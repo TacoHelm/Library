@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href = "style.css">
+</head>
+<body>
+    <form id="newBook" action="script.js" method="post">
+        <label for="title">Titel</label>
+        <input type="text" id="title" name="title">
+        <label for="author">Auteur</label>
+        <input type="text" id="author" name="author">
+        <label for="pages">Pagina's</label>
+        <input type="tel" id="pages" name="pages">
+        Gelezen
+        <input type="radio" id="yes" value="yes" name="read">
+        <label for="yes">Ja</label>
+        <input type="radio" id="no" value="no" name="read" checked>
+        <label for="no">Nee</label>
+        <button type="submit" id="submit">Add</button>
+    </form> 
+    <div class="container"></div>
+</body>
+<script src="script.js"></script>
+</html>
