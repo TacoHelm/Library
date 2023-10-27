@@ -5,21 +5,21 @@ myLibrary[0] = {
     title: "The Hobbit",
     author: "J.R.R. Tolkien",
     pages: 295,
-    read: 'yes'
+    read: 'Yes'
 }
 
 myLibrary[1] = {
     title: "A Game of Thrones",
     author: "George R.R. Martin",
     pages: 694,
-    read: 'yes'
+    read: 'Yes'
 }
 
 myLibrary[2] = {
     title: "The Gunslinger",
     author: "Stephen King",
     pages: 224,
-    read: 'no'
+    read: 'No'
 }
 
 
@@ -64,8 +64,9 @@ function displayBooks() {
     addBookToHtml(myLibrary[obj], obj);
     }
 
-    // Generate event-listeners remove buttons
+    // Generate event-listeners 
     removeEventListeners();
+    toggleReadEventListeners();
    
    
    return;
@@ -73,22 +74,27 @@ function displayBooks() {
 
 function addBookToHtml(book, arrayNumber){
     const newDiv = document.createElement('div');
+    const removeButton = document.createElement('div')
     const newH3 = document.createElement('h3');
     const newH4 = document.createElement('h4');
     const newH5 = document.createElement('h5');
-    const removeButton = document.createElement('div')
+    const toggleRead = document.createElement('div');
+    
 
     newDiv.classList.add(`${arrayNumber}`, `card`);
+    removeButton.classList.add("remove");
+    removeButton.innerHTML = `<img id = "${arrayNumber}"src="./Images/delete.svg">`
     newH3.textContent = book.title;
     newH4.textContent = book.author;
     newH5.textContent = book.pages + " Pagina's";
-    removeButton.classList.add("remove");
-    removeButton.innerHTML = `<img id = "${arrayNumber}"src="./Images/delete.svg">`
+    toggleRead.classList.add(`${arrayNumber}`, "toggleRead", book.read);
+    toggleRead.textContent = book.read;
     
     newDiv.appendChild(removeButton);
     newDiv.appendChild(newH3);
     newDiv.appendChild(newH4);
     newDiv.appendChild(newH5);
+    newDiv.appendChild(toggleRead);
     container.appendChild(newDiv);
 
 }
@@ -98,7 +104,6 @@ function addBookToHtml(book, arrayNumber){
 function removeEventListeners() {
 const removeButtons = document.querySelectorAll('.remove');
 for (i = 0; i < removeButtons.length; i++){
-    removeButtons[i].setAttribute('id', `${i}`);
     removeButtons[i].addEventListener('click', (e) => removeBook(e.target.id));
     }
 }
@@ -109,14 +114,31 @@ function removeBook (arrayNumber) {
     return;
 }
 
+// Read status
 
+function toggleReadEventListeners() {
+    const toggleReadButtons = document.querySelectorAll('.toggleRead');
+    for (i = 0; i < toggleReadButtons.length; i++){
+        toggleReadButtons[i].addEventListener('click', (e) => toggleRead(e.target.classList[0]));
+        }
+}
+
+function toggleRead(arrayNumber) {
+    switch (myLibrary[arrayNumber].read) {
+        case "Yes":
+            myLibrary[arrayNumber].read = "No";
+            break;
+        case "No":
+            myLibrary[arrayNumber].read = "Yes";
+            break;
+        default: 
+            myLibrary[arrayNumber].read = "No";
+            break;
+    }
+    displayBooks();
+    return;
+}
  
-
-/*
-Add a button on each book’s display to remove the book from the library.
-        You will need to associate your DOM elements with the actual book objects in some way. 
-        One easy solution is giving them a data-attribute that corresponds to the index of the library array.
-*/
 
 /*
 Add a button on each book’s display to change its read status.
