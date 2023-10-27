@@ -1,27 +1,5 @@
-/*
-All of your book objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user’s input and store the new 
-book objects into an array. Your code should look something like this:
-
 const myLibrary = [];
-
-function Book() {
-  // the constructor...
-}
-
-function addBookToLibrary() {
-  // do stuff here
-}
-
-    Write a function that loops through the array and displays each book on the page. You can display them in some sort of table, or each on their own “card”. 
-    A
-    
-    
-
-NOTE: You’re not required to add any type of storage right now. You will have the option to come back to this project later on in the course.
-*/
-
-const myLibrary = [];
-//It might help for now to manually add a few books to your array so you can see the display.
+const container = document.querySelector('.container'); //HTML container
 
 myLibrary[0] = {
     title: "The Hobbit",
@@ -45,7 +23,7 @@ myLibrary[2] = {
 }
 
 
-// Object-constructor
+// Object-constructor new Books
 
 function Book(title, author, pages, read){
     this.title = title;
@@ -57,8 +35,7 @@ function Book(title, author, pages, read){
 
 
 
-// New Book form  
-        /*For example, you may wish to have a form show in a sidebar or you may wish to explore dialogs and modals using the <dialog> tag*/
+// New Book Form   explore dialogs and modals using the <dialog> tag
 const newBookForm = document.querySelector('#newBook');
 newBookForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -72,21 +49,23 @@ function addBookToLibrary(title, author, pages, read) {
     return;
 }
 
-// Displaybooks
-const container = document.querySelector('.container');
-for (obj in myLibrary){
-    addBookToHtml(myLibrary[obj], obj);
-   }
+// Generate HTML for books
+displayBooks();
 
 function displayBooks() {
+    // Remove old HTML
     const cards = document.querySelectorAll('.card');
     for (i = 0; i < cards.length; i++) {
         container.removeChild(cards[i]);
     } 
     
+    // Generate new HTML
     for (obj in myLibrary){
     addBookToHtml(myLibrary[obj], obj);
     }
+
+    // Generate event-listeners remove buttons
+    removeEventListeners();
    
    
    return;
@@ -97,20 +76,41 @@ function addBookToHtml(book, arrayNumber){
     const newH3 = document.createElement('h3');
     const newH4 = document.createElement('h4');
     const newH5 = document.createElement('h5');
-    //const removeButton = document.createElement('div')
+    const removeButton = document.createElement('div')
 
     newDiv.classList.add(`${arrayNumber}`, `card`);
     newH3.textContent = book.title;
     newH4.textContent = book.author;
     newH5.textContent = book.pages + " Pagina's";
-    //removeButton.classList.add("remove");
+    removeButton.classList.add("remove");
+    removeButton.innerHTML = `<img id = "${arrayNumber}"src="./Images/delete.svg">`
     
-    //newDiv.appendChild(removeButton);
+    newDiv.appendChild(removeButton);
     newDiv.appendChild(newH3);
     newDiv.appendChild(newH4);
     newDiv.appendChild(newH5);
     container.appendChild(newDiv);
+
 }
+
+// Remove button
+
+function removeEventListeners() {
+const removeButtons = document.querySelectorAll('.remove');
+for (i = 0; i < removeButtons.length; i++){
+    removeButtons[i].setAttribute('id', `${i}`);
+    removeButtons[i].addEventListener('click', (e) => removeBook(e.target.id));
+    }
+}
+
+function removeBook (arrayNumber) {
+    myLibrary.splice(arrayNumber, 1);
+    displayBooks();
+    return;
+}
+
+
+ 
 
 /*
 Add a button on each book’s display to remove the book from the library.
