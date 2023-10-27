@@ -55,8 +55,10 @@ function Book(title, author, pages, read){
     return;
 }
 
+
+
 // New Book form  
-/*For example, you may wish to have a form show in a sidebar or you may wish to explore dialogs and modals using the <dialog> tag*/
+        /*For example, you may wish to have a form show in a sidebar or you may wish to explore dialogs and modals using the <dialog> tag*/
 const newBookForm = document.querySelector('#newBook');
 newBookForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -72,16 +74,19 @@ function addBookToLibrary(title, author, pages, read) {
 
 // Displaybooks
 const container = document.querySelector('.container');
-
-function displayBooks() {
-   //Delete current HTML
-
-
-   // Create new HTML
-   for (obj in myLibrary){
-    console.log(myLibrary[obj]);
+for (obj in myLibrary){
     addBookToHtml(myLibrary[obj], obj);
    }
+
+function displayBooks() {
+    const cards = document.querySelectorAll('.card');
+    for (i = 0; i < cards.length; i++) {
+        container.removeChild(cards[i]);
+    } 
+    
+    for (obj in myLibrary){
+    addBookToHtml(myLibrary[obj], obj);
+    }
    
    
    return;
@@ -89,16 +94,22 @@ function displayBooks() {
 
 function addBookToHtml(book, arrayNumber){
     const newDiv = document.createElement('div');
+    const newH3 = document.createElement('h3');
+    const newH4 = document.createElement('h4');
     const newH5 = document.createElement('h5');
-    const newP = document.createElement('p');
-    newH5.textContent =`${book.title}`;
-    newP.textContent = `${book.author} ${book.pages}`;
-    newDiv.classList.add(`${arrayNumber}`);
+    //const removeButton = document.createElement('div')
+
+    newDiv.classList.add(`${arrayNumber}`, `card`);
+    newH3.textContent = book.title;
+    newH4.textContent = book.author;
+    newH5.textContent = book.pages + " Pagina's";
+    //removeButton.classList.add("remove");
+    
+    //newDiv.appendChild(removeButton);
+    newDiv.appendChild(newH3);
+    newDiv.appendChild(newH4);
     newDiv.appendChild(newH5);
-    newDiv.appendChild(newP);
     container.appendChild(newDiv);
-
-
 }
 
 /*
