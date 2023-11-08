@@ -8,22 +8,33 @@
 </head>
 <body>
     
-    <form id="newBook" action="script.js" method="post">
-        <label for="title">Titel</label>
-        <input type="text" id="title" name="title">
-        <label for="author">Auteur</label>
-        <input type="text" id="author" name="author">
-        <label for="pages">Pagina's</label>
-        <input type="tel" id="pages" name="pages">
-        Gelezen
-        <input type="radio" id="yes" value="Yes" name="read">
-        <label for="yes">Ja</label>
-        <input type="radio" id="no" value="No" name="read" checked>
-        <label for="no">Nee</label>
-        <button type="submit" id="submit">Add</button>
-    </form> 
-    
-    <div class="container"></div>
+    <div class="main">
+        <div class="h1-container">
+            <h1>Library</h1>
+        </div>
+        <div class="form-container">
+            <form id="newBook" action="script.js" method="post">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title">
+                <label for="author">Author</label>
+                <input type="text" id="author" name="author">
+                <label for="pages">Pages</label>
+                <input type="tel" id="pages" name="pages">
+                <div class="radio-title">Read?</div>
+                <div class="radio-yes">
+                    <input type="radio" id="yes" value="Yes" name="read">
+                    <label for="yes">Yes</label>
+                </div>
+                <div class = "radio-no">
+                    <input type="radio" id="no" value="No" name="read" checked>
+                    <label for="no">No</label>
+                </div>
+                <button type="submit" id="submit">Add</button>
+            </form>
+            
+        </div>
+        <div class="container"></div>
+    </div>
 
 </body>
 <script src="script.js"></script>
