@@ -4,52 +4,53 @@ Practice
 Go back to your Library project and refactor it to use class instead of plain constructors. Don’t forget to use the git workflow you learned in this foundations lesson to work on a new feature. You should get used to working like this!
 */
 
+const startLibrary = [];
 const myLibrary = [];
 const container = document.querySelector('.container'); //HTML container
 
-myLibrary[0] = {
+startLibrary[0] = {
     title: "The Hobbit",
     author: "J.R.R. Tolkien",
     pages: 295,
     read: 'Yes'
 }
 
-myLibrary[1] = {
+startLibrary[1] = {
     title: "A Game of Thrones",
     author: "George R.R. Martin",
     pages: 694,
     read: 'Yes'
 }
 
-myLibrary[2] = {
+startLibrary[2] = {
     title: "The Gunslinger",
     author: "Stephen King",
     pages: 224,
     read: 'No'
 }
 
-myLibrary[3] = {
+startLibrary[3] = {
     title: "The Stand",
     author: "Stephen King",
     pages: 823,
     read: 'No'
 }
 
-myLibrary[4] = {
+startLibrary[4] = {
     title: "The Long Walk",
     author: "Richard Bachman",
     pages: 384,
     read: 'No'
 }
 
-myLibrary[5] = {
+startLibrary[5] = {
     title: "Misery",
     author: "Stephen King",
     pages: 310,
     read: 'No'
 }
 
-myLibrary[6] = {
+startLibrary[6] = {
     title: "Insomnia",
     author: "Stephen King",
     pages: 787,
@@ -57,15 +58,6 @@ myLibrary[6] = {
 }
 
 
-// Object-constructor new Books
-
-/*function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    return;
-}*/
 
 
 
@@ -94,7 +86,7 @@ class Book {
       myLibrary.push(this);
     }
   
-    /* setHTML() {
+    addBookToHTML(book, arrayNumber) {
         const newDiv = document.createElement('div');
         const removeButton = document.createElement('div');
         const newH3 = document.createElement('h3');
@@ -117,7 +109,7 @@ class Book {
         newDiv.appendChild(newH5);
         newDiv.appendChild(toggleRead);
         container.appendChild(newDiv);
-        } */
+        } 
   
     //get something() {} // getter method
     //set something() {} // setter method
@@ -126,6 +118,9 @@ class Book {
     // ...
 }
 
+for(obj in startLibrary){
+    new Book(startLibrary[obj].title, startLibrary[obj].author, startLibrary[obj].pages, startLibrary[obj].read);
+}
 
 
 // Generate HTML for books
@@ -140,7 +135,7 @@ function displayBooks() {
     
     // Generate new HTML
     for (obj in myLibrary){
-    addBookToHtml(myLibrary[obj], obj);
+    myLibrary[obj].addBookToHTML(myLibrary[obj], obj);
     }
 
     // Generate event-listeners 
@@ -151,32 +146,6 @@ function displayBooks() {
    return;
 }
 
-function addBookToHtml(book, arrayNumber){
-    const newDiv = document.createElement('div');
-    const removeButton = document.createElement('div');
-    const newH3 = document.createElement('h3');
-    const newH4 = document.createElement('h4');
-    const newH5 = document.createElement('h5');
-    const toggleRead = document.createElement('div');
-    
-
-    newDiv.classList.add(`${arrayNumber}`, `card`);
-    removeButton.classList.add("remove");
-    removeButton.innerHTML = `<img id = "${arrayNumber}"src="./Images/delete.svg">`
-    newH3.textContent = book.title;
-    newH4.textContent = book.author;
-    newH5.textContent = book.pages + " Pages";
-    toggleRead.classList.add(`${arrayNumber}`, "toggleRead", book.read);
-    toggleRead.textContent = "Read: " + book.read;
-    
-    newDiv.appendChild(removeButton);
-    newDiv.appendChild(newH3);
-    newDiv.appendChild(newH4);
-    newDiv.appendChild(newH5);
-    newDiv.appendChild(toggleRead);
-    container.appendChild(newDiv);
-
-}
 
 // Remove button
 
