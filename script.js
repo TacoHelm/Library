@@ -58,9 +58,6 @@ startLibrary[6] = {
 }
 
 
-
-
-
 // New Book Form   explore dialogs and modals using the <dialog> tag
 const newBookForm = document.querySelector('#newBook');
 newBookForm.addEventListener('submit', (e) => {
@@ -186,4 +183,13 @@ function toggleRead(arrayNumber) {
     displayBooks();
     return;
 }
+
+document.addEventListener('change', (e) => {
+    console.log(e.target.validity);
+    if (e.target.validity.patternMismatch === true) alert('Alleen letters en spaties!'); 
+    if (e.target.validity.stepMismatch === true) alert('Alleen gehele getallen!');
+});
+
+const [...inputs] = document.querySelectorAll('input');
+console.log(inputs);
  

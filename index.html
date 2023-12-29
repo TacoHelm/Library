@@ -15,11 +15,11 @@
         <div class="form-container">
             <form id="newBook" action="script.js" method="post">
                 <label for="title">Title</label>
-                <input type="text" id="title" name="title">
+                <input type="text" id="title" name="title" required pattern="^[A-Za-z\s]*$">
                 <label for="author">Author</label>
-                <input type="text" id="author" name="author">
+                <input type="text" id="author" name="author" required pattern="^[A-Za-z\s]*$">
                 <label for="pages">Pages</label>
-                <input type="tel" id="pages" name="pages">
+                <input type="number" id="pages" name="pages" required min="10" step="1">
                 <div class="radio-title">Read?</div>
                 <div class="radio-yes">
                     <input type="radio" id="yes" value="Yes" name="read">
